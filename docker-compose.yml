@@ -28,7 +28,7 @@ services:
   frontend:
     build:
       context: .
-      dockerfile: /apps/frontend/Dockerfile
+      dockerfile: apps/frontend/Dockerfile
     container_name: next-frontend
     restart: unless-stopped
     ports:
