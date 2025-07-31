@@ -12,5 +12,29 @@ services:
     volumes:
       - postgres-data:/var/lib/postgresql/data
 
+  backend:
+    build:
+      context: .
+      dockerfile: apps/backend/Dockerfile
+    container_name: nest-backend
+    restart: unless-stopped
+    environment:
+      - NODE_ENV=production
+    ports:
+      - "4000:3000"
+    depends_on:
+      - db
+
+  frontend:
+    build:
+      context: .
+      dockerfile: apps/frontend/Dockerfile
+    container_name: next-frontend
+    restart: unless-stopped
+    ports:
+      - "3000:3000"
+    depends_on:
+      - backend
+
 volumes:
   postgres-data:
